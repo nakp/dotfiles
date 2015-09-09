@@ -1,35 +1,27 @@
-"NeoBundle Scripts-----------------------------
 if has('vim_starting')
   if &compatible
     set nocompatible               " Be iMproved
   endif
-
-  " Required:
-  set runtimepath+=~/.vim/bundle/neobundle.vim/
 endif
 
 " Required:
-call neobundle#begin(expand('~/.vim/bundle'))
+call plug#begin('~/.vim/plugged')
 
-" Let NeoBundle manage NeoBundle
-" Required:
-NeoBundleFetch 'Shougo/neobundle.vim'
-
-NeoBundle 'scrooloose/nerdtree'
-NeoBundle 'tpope/vim-commentary'
-NeoBundle 'vim-scripts/AutoClose'
-NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'ctrlpvim/ctrlp.vim'
-NeoBundle 'bling/vim-airline'
-NeoBundle 'airblade/vim-gitgutter'
-NeoBundle 'sheerun/vim-polyglot'
-NeoBundle 'vim-scripts/grep.vim'
-NeoBundle 'ntpeters/vim-better-whitespace'
-NeoBundle 'rking/ag.vim'
+Plug 'scrooloose/nerdtree'
+Plug 'tpope/vim-commentary'
+Plug 'vim-scripts/AutoClose'
+Plug 'tpope/vim-fugitive'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'bling/vim-airline'
+Plug 'airblade/vim-gitgutter'
+Plug 'sheerun/vim-polyglot'
+Plug 'vim-scripts/grep.vim'
+Plug 'ntpeters/vim-better-whitespace'
+Plug 'rking/ag.vim'
 
 " Vim Shell
-NeoBundle 'Shougo/vimproc.vim', {
-      \ 'build' : {
+Plug 'Shougo/vimproc.vim', {
+      \ 'do' : {
       \     'windows' : 'tools\\update-dll-mingw',
       \     'cygwin' : 'make -f make_cygwin.mak',
       \     'mac' : 'make -f make_mac.mak',
@@ -38,43 +30,38 @@ NeoBundle 'Shougo/vimproc.vim', {
       \ }
 
 if v:version > 702
-	NeoBundle 'Shougo/vimshell.vim'
+	Plug 'Shougo/vimshell.vim'
 endif
 
 "" Completion
-NeoBundle 'Shougo/neocomplete.vim'
+Plug 'Shougo/neocomplete.vim'
 
 "" Vim-Session
-NeoBundle 'xolox/vim-misc'
-NeoBundle 'xolox/vim-session'
+Plug 'xolox/vim-misc'
+Plug 'xolox/vim-session'
 
 " Syntaxis
-NeoBundle 'scrooloose/syntastic'
-NeoBundle 'majutsushi/tagbar'
-NeoBundle 'xolox/vim-easytags'
+Plug 'scrooloose/syntastic'
+Plug 'majutsushi/tagbar'
+Plug 'xolox/vim-easytags'
 
 " WebDev Bundle
-NeoBundle 'mattn/emmet-vim'
+Plug 'mattn/emmet-vim'
 " PHP Bundle
-NeoBundle 'arnaud-lb/vim-php-namespace'
-NeoBundle 'shawncplus/phpcomplete.vim'
+Plug 'arnaud-lb/vim-php-namespace'
+Plug 'shawncplus/phpcomplete.vim'
 
 " Laravel
-NeoBundle 'xsbeats/vim-blade'
+Plug 'xsbeats/vim-blade'
 
 " Color
-NeoBundle 'chriskempson/base16-vim'
+Plug 'chriskempson/base16-vim'
 
 " Required:
-call neobundle#end()
+call plug#end()
 
 " Required:
 filetype plugin indent on
-
-" If there are uninstalled bundles found on startup,
-" this will conveniently prompt you to install them.
-NeoBundleCheck
-"End NeoBundle Scripts-------------------------
 
 runtime macros/matchit.vim
 
