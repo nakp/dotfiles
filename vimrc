@@ -44,6 +44,8 @@ Plug 'xolox/vim-session'
 Plug 'scrooloose/syntastic'
 Plug 'majutsushi/tagbar'
 Plug 'xolox/vim-easytags'
+Plug 'tpope/vim-surround'
+Plug 'scrooloose/nerdcommenter'
 
 " WebDev Bundle
 Plug 'mattn/emmet-vim'
