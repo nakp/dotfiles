@@ -8,7 +8,6 @@ endif
 call plug#begin('~/.vim/plugged')
 
 Plug 'scrooloose/nerdtree'
-Plug 'tpope/vim-commentary'
 Plug 'vim-scripts/AutoClose'
 Plug 'tpope/vim-fugitive'
 Plug 'ctrlpvim/ctrlp.vim'
@@ -50,8 +49,9 @@ Plug 'scrooloose/nerdcommenter'
 " WebDev Bundle
 Plug 'mattn/emmet-vim'
 " PHP Bundle
-Plug 'arnaud-lb/vim-php-namespace'
-Plug 'shawncplus/phpcomplete.vim'
+Plug 'arnaud-lb/vim-php-namespace', {'for': 'php'}
+Plug 'shawncplus/phpcomplete.vim', {'for': 'php'}
+Plug 'stephpy/vim-php-cs-fixer', {'for': 'php'}
 
 " Laravel
 Plug 'xsbeats/vim-blade'
