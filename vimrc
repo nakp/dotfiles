@@ -56,6 +56,10 @@ Plug 'stephpy/vim-php-cs-fixer', {'for': 'php'}
 " Laravel
 Plug 'xsbeats/vim-blade'
 
+"" Do not distract me!
+Plug 'junegunn/goyo.vim'
+Plug 'junegunn/limelight.vim'
+
 " Color
 Plug 'chriskempson/base16-vim'
 
@@ -214,6 +218,7 @@ nnoremap <leader>sc :CloseSession<CR>
 "" Clean search (highlight)
 nnoremap <silent> <leader><space> :noh<cr>
 
+
 "" ctrlp.vim
 set wildmode=list:longest,list:full
 set wildignore+=*.o,*.obj,.git,*.rbc,*.pyc,__pycache__
@@ -249,6 +254,16 @@ nmap <F8> :TagbarToggle<CR>
 
 "" emmet
 imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
+
+"" Limelight
+let g:limelight_default_coefficient = 0.7
+
+"" Goyo
+map <silent> <F9> :Goyo<CR>:GitGutterEnable<CR>
+autocmd! User GoyoEnter Limelight
+autocmd! User GoyoLeave Limelight!
+
+
 "" Completion
 " Neocomplete
 let g:neocomplete#enable_at_startup = 1
