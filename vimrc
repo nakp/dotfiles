@@ -106,7 +106,7 @@ set binary
 set ttyfast
 
 "" Errors
-set visualbell                  " don't beep
+set novisualbell                  " don't beep
 set noerrorbells                " don't beep
 
 "" Visual Settings
