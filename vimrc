@@ -49,9 +49,9 @@ Plug 'scrooloose/nerdcommenter'
 " WebDev Bundle
 Plug 'mattn/emmet-vim'
 " PHP Bundle
-Plug 'arnaud-lb/vim-php-namespace', {'for': 'php'}
-Plug 'shawncplus/phpcomplete.vim', {'for': 'php'}
-Plug 'stephpy/vim-php-cs-fixer', {'for': 'php'}
+Plug 'arnaud-lb/vim-php-namespace'
+Plug 'shawncplus/phpcomplete.vim'
+Plug 'stephpy/vim-php-cs-fixer'
 
 " Laravel
 Plug 'xsbeats/vim-blade'
