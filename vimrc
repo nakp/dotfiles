@@ -20,12 +20,7 @@ Plug 'rking/ag.vim'
 
 " Vim Shell
 Plug 'Shougo/vimproc.vim', {
-      \ 'do' : {
-      \     'windows' : 'tools\\update-dll-mingw',
-      \     'cygwin' : 'make -f make_cygwin.mak',
-      \     'mac' : 'make -f make_mac.mak',
-      \     'unix' : 'make -f make_unix.mak',
-      \    },
+      \ 'do' : 'make',
       \ }
 
 if v:version > 702
@@ -118,6 +113,7 @@ set updatetime=750
 autocmd Filetype php setlocal ts=4 sts=4 sw=4 expandtab
 autocmd FileType ruby setlocal ts=4 sts=4 sw=4 expandtab
 autocmd FileType vim setlocal ts=2 sts=2 sw=2 expandtab
+autocmd FileType jade setlocal ts=2 sts=2 sw=2 expandtab
 
 "" Tags
 ""tags=tags;
@@ -262,7 +258,6 @@ let g:limelight_default_coefficient = 0.7
 map <silent> <F9> :Goyo<CR>:GitGutterEnable<CR>
 autocmd! User GoyoEnter Limelight
 autocmd! User GoyoLeave Limelight!
-
 
 "" Completion
 " Neocomplete
