@@ -30,6 +30,10 @@ endif
 "" Completion
 Plug 'Shougo/neocomplete.vim'
 
+"" Writing
+Plug 'reedes/vim-pencil'
+Plug 'junegunn/rainbow_parentheses.vim'
+
 "" Vim-Session
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-session'
@@ -177,18 +181,18 @@ noremap <F3> :NERDTreeToggle<CR>
 "*****************************************************************************
 
 "" Split
-noremap <Leader>h :<C-u>split<CR>
-noremap <Leader>v :<C-u>vsplit<CR>
+noremap <leader>h :<C-u>split<CR>
+noremap <leader>v :<C-u>vsplit<CR>
 
 "" Git
-noremap <Leader>ga :Gwrite<CR>
-noremap <Leader>gc :Gcommit<CR>
-noremap <Leader>gsh :Gpush<CR>
-noremap <Leader>gll :Gpull<CR>
-noremap <Leader>gs :Gstatus<CR>
-noremap <Leader>gb :Gblame<CR>
-noremap <Leader>gd :Gvdiff<CR>
-noremap <Leader>gr :Gremove<CR>
+noremap <leader>ga :Gwrite<CR>
+noremap <leader>gc :Gcommit<CR>
+noremap <leader>gsh :Gpush<CR>
+noremap <leader>gll :Gpull<CR>
+noremap <leader>gs :Gstatus<CR>
+noremap <leader>gb :Gblame<CR>
+noremap <leader>gd :Gvdiff<CR>
+noremap <leader>gr :Gremove<CR>
 
 "" Tabs
 nnoremap <Tab> gt
@@ -253,11 +257,21 @@ imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
 
 "" Limelight
 let g:limelight_default_coefficient = 0.7
+noremap <silent> <leader>ll :Limelight!!<CR>
 
 "" Goyo
 map <silent> <F9> :Goyo<CR>:GitGutterEnable<CR>
 autocmd! User GoyoEnter Limelight
 autocmd! User GoyoLeave Limelight!
+
+"" Pencil
+let g:pencil#wrapModeDefault = 'soft'   " default is 'hard'
+
+augroup pencil
+  autocmd!
+  autocmd FileType markdown,mkd call pencil#init()
+  autocmd FileType text         call pencil#init()
+augroup END
 
 "" Completion
 " Neocomplete
