@@ -7,11 +7,10 @@ endif
 " Required:
 call plug#begin('~/.vim/plugged')
 
-Plug 'scrooloose/nerdtree'
 Plug 'vim-scripts/AutoClose'
 Plug 'tpope/vim-fugitive'
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'airblade/vim-gitgutter'
 Plug 'sheerun/vim-polyglot'
 Plug 'vim-scripts/grep.vim'
@@ -24,8 +23,12 @@ Plug 'Shougo/vimproc.vim', {
       \ }
 
 if v:version > 702
-	Plug 'Shougo/vimshell.vim'
+  Plug 'Shougo/vimshell.vim'
 endif
+
+"" UI
+Plug 'Shougo/unite.vim'
+Plug 'Shougo/vimfiler.vim'
 
 "" Completion
 Plug 'Shougo/neocomplete.vim'
@@ -69,7 +72,6 @@ call plug#end()
 filetype plugin indent on
 
 runtime macros/matchit.vim
-
 
 "" Encoding
 set encoding=utf-8
@@ -165,16 +167,16 @@ cnoreabbrev Qall qall
 cnoreabbrev E e
 
 "" NERDTree configuration
-let g:NERDTreeChDirMode=2
-let g:NERDTreeIgnore=['\.rbc$', '\~$', '\.pyc$', '\.db$', '\.sqlite$', '__pycache__']
-let g:NERDTreeSortOrder=['^__\.py$', '\/$', '*', '\.swp$', '\.bak$', '\~$']
-let g:NERDTreeShowBookmarks=1
-let g:nerdtree_tabs_focus_on_files=1
-let g:NERDTreeMapOpenInTabSilent = '<RightMouse>'
-let g:NERDTreeWinSize = 20
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc,*.db,*.sqlite
-nnoremap <silent> <F2> :NERDTreeFind<CR>
-noremap <F3> :NERDTreeToggle<CR>
+"let g:NERDTreeChDirMode=2
+"let g:NERDTreeIgnore=['\.rbc$', '\~$', '\.pyc$', '\.db$', '\.sqlite$', '__pycache__']
+"let g:NERDTreeSortOrder=['^__\.py$', '\/$', '*', '\.swp$', '\.bak$', '\~$']
+"let g:NERDTreeShowBookmarks=1
+"let g:nerdtree_tabs_focus_on_files=1
+"let g:NERDTreeMapOpenInTabSilent = '<RightMouse>'
+"let g:NERDTreeWinSize = 20
+"set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc,*.db,*.sqlite
+"nnoremap <silent> <F2> :NERDTreeFind<CR>
+"noremap <F3> :NERDTreeToggle<CR>
 
 "*****************************************************************************
 "" Mappings
@@ -220,29 +222,38 @@ nnoremap <silent> <leader><space> :noh<cr>
 
 
 "" ctrlp.vim
-set wildmode=list:longest,list:full
-set wildignore+=*.o,*.obj,.git,*.rbc,*.pyc,__pycache__
-let g:ctrlp_use_caching = 0
-cnoremap <C-P> <C-R>=expand("%:p:h") . "/" <CR>
+"set wildmode=list:longest,list:full
+"set wildignore+=*.o,*.obj,.git,*.rbc,*.pyc,__pycache__
+"let g:ctrlp_use_caching = 0
+"cnoremap <C-P> <C-R>=expand("%:p:h") . "/" <CR>
 
-noremap <leader>b :CtrlPBuffer<CR>
-let g:ctrlp_map = '<leader>e'
-let g:ctrlp_open_new_file = 'r'
+"noremap <leader>b :CtrlPBuffer<CR>
+"let g:ctrlp_map = '<leader>e'
+"let g:ctrlp_open_new_file = 'r'
 
-"" ag and ctrlp options (mixin rite)
-if executable('ag')
-	let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-	set grepprg=ag\ --nogroup\ --nocolor
-else
-	let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn|tox)$'
-	let g:ctrlp_user_command = "find %s -type f | grep -Ev '"+ g:ctrlp_custom_ignore +"'"
-endif
+""" ag and ctrlp options (mixin rite)
+"if executable('ag')
+  "let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+  "set grepprg=ag\ --nogroup\ --nocolor
+"else
+  "let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn|tox)$'
+  "let g:ctrlp_user_command = "find %s -type f | grep -Ev '"+ g:ctrlp_custom_ignore +"'"
+"endif
+
+"" Unite
+call unite#filters#matcher_default#use(['matcher_fuzzy'])
+nnoremap <leader>ft :Unite file_rec/async -default-action=tabopen <cr>
+nnoremap <leader>fs :Unite file_rec/async -default-action=split <cr>
+nnoremap <leader>fv :Unite file_rec/async -default-action=vsplit <cr>
+nnoremap <leader>fc :Unite file_rec/async:! <cr>
+
+"" VimFiler
+noremap <F3> :VimFilerEx<CR>
 
 if has("gui_running")
   set background=dark
   colorscheme base16-solarized
   if has("gui_macvim")
-    set guifont=Source\ Code\ Pro\ for\ Powerline:h12
     set transparency=5
   endif
 else
