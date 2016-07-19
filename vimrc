@@ -112,6 +112,7 @@ set noerrorbells                " don't beep
 
 "" Visual Settings
 syntax enable
+set cursorline
 set number relativenumber
 set updatetime=750
 
@@ -133,6 +134,7 @@ set noshowmode
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#syntastic#enabled = 1
 let g:airline#extensions#whitespace#mixed_indent_algo = 1
+let g:airline_theme='base16'
 
 " Syntastic
 set statusline+=%#warningmsg#
@@ -183,6 +185,7 @@ cnoreabbrev E e
 "*****************************************************************************
 
 "" Split
+noremap <leader>s :<C-u>e ~/.vimrc<CR>
 noremap <leader>h :<C-u>split<CR>
 noremap <leader>v :<C-u>vsplit<CR>
 
@@ -252,12 +255,14 @@ noremap <F3> :VimFilerEx<CR>
 
 if has("gui_running")
   set background=dark
-  colorscheme base16-solarized
+  colorscheme base16-solarized-dark
   if has("gui_macvim")
     set transparency=5
   endif
 else
+  let base16colorspace=256
   colorscheme base16-monokai
+  set background=dark
 endif
 
 "" tagbar
