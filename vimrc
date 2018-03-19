@@ -122,6 +122,15 @@ autocmd FileType ruby setlocal ts=4 sts=4 sw=4 expandtab
 autocmd FileType vim setlocal ts=2 sts=2 sw=2 expandtab
 autocmd FileType jade setlocal ts=2 sts=2 sw=2 expandtab
 
+au BufNewFile,BufRead Appfile set ft=ruby
+au BufNewFile,BufRead Deliverfile set ft=ruby
+au BufNewFile,BufRead Fastfile set ft=ruby
+au BufNewFile,BufRead Gymfile set ft=ruby
+au BufNewFile,BufRead Matchfile set ft=ruby
+au BufNewFile,BufRead Snapfile set ft=ruby
+au BufNewFile,BufRead Scanfile set ft=ruby
+au BufNewFile,BufRead Podfile set ft=ruby
+
 "" Tags
 ""tags=tags;
 
@@ -255,13 +264,14 @@ noremap <F3> :VimFilerEx<CR>
 
 if has("gui_running")
   set background=dark
+  set clipboard=unnamed
   colorscheme base16-solarized-dark
   if has("gui_macvim")
     set transparency=5
   endif
 else
   let base16colorspace=256
-  colorscheme base16-monokai
+  colorscheme base16-solarized-dark
   set background=dark
 endif
 
