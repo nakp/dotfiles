@@ -118,7 +118,7 @@ set updatetime=750
 
 " Filetypes
 autocmd Filetype php setlocal ts=4 sts=4 sw=4 expandtab
-autocmd FileType ruby setlocal ts=4 sts=4 sw=4 expandtab
+autocmd FileType ruby setlocal ts=2 sts=2 sw=2 expandtab
 autocmd FileType vim setlocal ts=2 sts=2 sw=2 expandtab
 autocmd FileType jade setlocal ts=2 sts=2 sw=2 expandtab
 
