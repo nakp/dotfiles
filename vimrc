@@ -63,7 +63,7 @@ Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
 
 " Color
-Plug 'chriskempson/base16-vim'
+Plug 'danielwe/base16-vim'
 
 " Required:
 call plug#end()
