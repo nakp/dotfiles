@@ -42,7 +42,8 @@ Plug 'xolox/vim-misc'
 Plug 'xolox/vim-session'
 
 " Syntaxis
-Plug 'scrooloose/syntastic'
+"Plug 'vim-syntastic/syntastic'
+Plug 'w0rp/ale'
 Plug 'majutsushi/tagbar'
 Plug 'xolox/vim-easytags'
 Plug 'tpope/vim-surround'
