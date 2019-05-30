@@ -1,7 +1,7 @@
 if has('vim_starting')
-  if &compatible
-    set nocompatible               " Be iMproved
-  endif
+	if &compatible
+		set nocompatible               " Be iMproved
+	endif
 endif
 
 " Required:
@@ -17,21 +17,9 @@ Plug 'vim-scripts/grep.vim'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'rking/ag.vim'
 
-" Vim Shell
-Plug 'Shougo/vimproc.vim', {
-      \ 'do' : 'make',
-      \ }
-
-if v:version > 702
-  Plug 'Shougo/vimshell.vim'
-endif
-
 "" UI
-Plug 'Shougo/unite.vim'
-Plug 'Shougo/vimfiler.vim'
 
 "" Completion
-Plug 'Shougo/neocomplete.vim'
 
 "" Writing
 Plug 'reedes/vim-pencil'
@@ -51,8 +39,9 @@ Plug 'scrooloose/nerdcommenter'
 
 " WebDev Bundle
 Plug 'mattn/emmet-vim'
+"
 " PHP Bundle
-Plug 'arnaud-lb/vim-php-namespace'
+"Plug 'arnaud-lb/vim-php-namespace'
 Plug 'shawncplus/phpcomplete.vim'
 Plug 'stephpy/vim-php-cs-fixer'
 
@@ -153,7 +142,7 @@ set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
-let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 1
 let g:syntastic_error_symbol = "✗"
 let g:syntastic_warning_symbol = "⚠"
@@ -179,18 +168,6 @@ cnoreabbrev W w
 cnoreabbrev Q q
 cnoreabbrev Qall qall
 cnoreabbrev E e
-
-"" NERDTree configuration
-"let g:NERDTreeChDirMode=2
-"let g:NERDTreeIgnore=['\.rbc$', '\~$', '\.pyc$', '\.db$', '\.sqlite$', '__pycache__']
-"let g:NERDTreeSortOrder=['^__\.py$', '\/$', '*', '\.swp$', '\.bak$', '\~$']
-"let g:NERDTreeShowBookmarks=1
-"let g:nerdtree_tabs_focus_on_files=1
-"let g:NERDTreeMapOpenInTabSilent = '<RightMouse>'
-"let g:NERDTreeWinSize = 20
-"set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc,*.db,*.sqlite
-"nnoremap <silent> <F2> :NERDTreeFind<CR>
-"noremap <F3> :NERDTreeToggle<CR>
 
 "*****************************************************************************
 "" Mappings
@@ -235,47 +212,17 @@ nnoremap <leader>sc :CloseSession<CR>
 "" Clean search (highlight)
 nnoremap <silent> <leader><space> :noh<cr>
 
-
-"" ctrlp.vim
-"set wildmode=list:longest,list:full
-"set wildignore+=*.o,*.obj,.git,*.rbc,*.pyc,__pycache__
-"let g:ctrlp_use_caching = 0
-"cnoremap <C-P> <C-R>=expand("%:p:h") . "/" <CR>
-
-"noremap <leader>b :CtrlPBuffer<CR>
-"let g:ctrlp_map = '<leader>e'
-"let g:ctrlp_open_new_file = 'r'
-
-""" ag and ctrlp options (mixin rite)
-"if executable('ag')
-  "let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-  "set grepprg=ag\ --nogroup\ --nocolor
-"else
-  "let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn|tox)$'
-  "let g:ctrlp_user_command = "find %s -type f | grep -Ev '"+ g:ctrlp_custom_ignore +"'"
-"endif
-
-"" Unite
-call unite#filters#matcher_default#use(['matcher_fuzzy'])
-nnoremap <leader>ft :Unite file_rec/async -default-action=tabopen <cr>
-nnoremap <leader>fs :Unite file_rec/async -default-action=split <cr>
-nnoremap <leader>fv :Unite file_rec/async -default-action=vsplit <cr>
-nnoremap <leader>fc :Unite file_rec/async:! <cr>
-
-"" VimFiler
-noremap <F3> :VimFilerEx<CR>
-
 if has("gui_running")
-  set background=dark
-  set clipboard=unnamed
-  colorscheme base16-solarized-dark
-  if has("gui_macvim")
-    set transparency=5
-  endif
+	set background=dark
+	set clipboard=unnamed
+	colorscheme base16-solarized-dark
+	if has("gui_macvim")
+		set transparency=5
+	endif
 else
-  let base16colorspace=256
-  colorscheme base16-solarized-dark
-  set background=dark
+	let base16colorspace=256
+	colorscheme base16-solarized-dark
+	set background=dark
 endif
 
 "" tagbar
@@ -297,13 +244,8 @@ autocmd! User GoyoLeave Limelight!
 let g:pencil#wrapModeDefault = 'soft'   " default is 'hard'
 
 augroup pencil
-  autocmd!
-  autocmd FileType markdown,mkd call pencil#init()
-  autocmd FileType text         call pencil#init()
+	autocmd!
+	autocmd FileType markdown,mkd call pencil#init()
+	autocmd FileType text         call pencil#init()
 augroup END
-
-"" Completion
-" Neocomplete
-let g:neocomplete#enable_at_startup = 1
-let g:neocomplete#enable_smart_case = 1
 
