@@ -290,8 +290,8 @@ noremap <silent> <leader>ll :Limelight!!<CR>
 
 "" Goyo
 map <silent> <F9> :Goyo<CR>
-autocmd! User GoyoEnter Limelight SignifyDisable
-autocmd! User GoyoLeave Limelight! SignifyEnable
+autocmd! User GoyoEnter Limelight
+autocmd! User GoyoLeave Limelight!
 
 "" Pencil
 let g:pencil#wrapModeDefault = 'soft'   " default is 'hard'
