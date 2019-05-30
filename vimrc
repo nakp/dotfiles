@@ -119,6 +119,8 @@ set updatetime=750
 
 " Filetypes
 autocmd Filetype php setlocal ts=4 sts=4 sw=4 expandtab
+autocmd Filetype python setlocal ts=4 sts=4 sw=4 expandtab
+autocmd Filetype Jenkinsfile setlocal ts=4 sts=4 sw=4 expandtab
 autocmd FileType ruby setlocal ts=2 sts=2 sw=2 expandtab
 autocmd FileType vim setlocal ts=2 sts=2 sw=2 expandtab
 autocmd FileType jade setlocal ts=2 sts=2 sw=2 expandtab
@@ -287,9 +289,9 @@ let g:limelight_default_coefficient = 0.7
 noremap <silent> <leader>ll :Limelight!!<CR>
 
 "" Goyo
-map <silent> <F9> :Goyo<CR>:GitGutterEnable<CR>
-autocmd! User GoyoEnter Limelight
-autocmd! User GoyoLeave Limelight!
+map <silent> <F9> :Goyo<CR>
+autocmd! User GoyoEnter Limelight SignifyDisable
+autocmd! User GoyoLeave Limelight! SignifyEnable
 
 "" Pencil
 let g:pencil#wrapModeDefault = 'soft'   " default is 'hard'
