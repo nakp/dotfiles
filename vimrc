@@ -1,7 +1,7 @@
 if has('vim_starting')
-	if &compatible
-		set nocompatible               " Be iMproved
-	endif
+  if &compatible
+    set nocompatible               " Be iMproved
+  endif
 endif
 
 " Required:
@@ -15,11 +15,18 @@ Plug 'mhinz/vim-signify'
 Plug 'sheerun/vim-polyglot'
 Plug 'vim-scripts/grep.vim'
 Plug 'ntpeters/vim-better-whitespace'
-Plug 'rking/ag.vim'
+Plug 'mileszs/ack.vim'
 
 "" UI
 
 "" Completion
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
 
 "" Writing
 Plug 'reedes/vim-pencil'
@@ -31,7 +38,7 @@ Plug 'xolox/vim-session'
 
 " Syntaxis
 "Plug 'vim-syntastic/syntastic'
-Plug 'w0rp/ale'
+Plug 'dense-analysis/ale'
 Plug 'majutsushi/tagbar'
 Plug 'xolox/vim-easytags'
 Plug 'tpope/vim-surround'
@@ -53,7 +60,7 @@ Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
 
 " Color
-Plug 'danielwe/base16-vim'
+Plug 'chriskempson/base16-vim'
 
 " Required:
 call plug#end()
@@ -133,19 +140,24 @@ let g:strip_whitespace_on_save = 1
 set laststatus=2
 set noshowmode
 let g:airline_powerline_fonts = 1
-let g:airline#extensions#syntastic#enabled = 1
+"let g:airline#extensions#syntastic#enabled = 1
+let g:airline#extensions#ale#enabled = 1
 let g:airline#extensions#whitespace#mixed_indent_algo = 1
 let g:airline_theme='base16'
 
 " Syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
 
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 1
-let g:syntastic_error_symbol = "✗"
-let g:syntastic_warning_symbol = "⚠"
+"let g:syntastic_check_on_open = 0
+"let g:syntastic_check_on_wq = 1
+"let g:syntastic_error_symbol = "✗"
+"let g:syntastic_warning_symbol = "⚠"
+
+"" ALE
+let g:ale_sign_error = '✗'
+let g:ale_sign_warning = '⚠'
 
 " session management
 let g:session_directory = "~/.vim/session"
@@ -213,17 +225,27 @@ nnoremap <leader>sc :CloseSession<CR>
 nnoremap <silent> <leader><space> :noh<cr>
 
 if has("gui_running")
-	set background=dark
-	set clipboard=unnamed
-	colorscheme base16-solarized-dark
-	if has("gui_macvim")
-		set transparency=5
-	endif
+  set background=dark
+  set clipboard=unnamed
+  colorscheme base16-solarized-dark
+  if has("gui_macvim")
+    set transparency=5
+  endif
 else
-	let base16colorspace=256
-	colorscheme base16-solarized-dark
-	set background=dark
+  let base16colorspace=256
+  colorscheme base16-solarized-dark
+  set background=dark
 endif
+
+""ack/ag
+if executable('rg')
+  let g:ackprg = 'rg --vimgrep'
+elseif executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
+
+"" deoplete
+let g:deoplete#enable_at_startup = 1
 
 "" tagbar
 nmap <F8> :TagbarToggle<CR>
@@ -244,8 +266,8 @@ autocmd! User GoyoLeave Limelight!
 let g:pencil#wrapModeDefault = 'soft'   " default is 'hard'
 
 augroup pencil
-	autocmd!
-	autocmd FileType markdown,mkd call pencil#init()
-	autocmd FileType text         call pencil#init()
+  autocmd!
+  autocmd FileType markdown,mkd call pencil#init()
+  autocmd FileType text         call pencil#init()
 augroup END
 
