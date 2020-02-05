@@ -5,7 +5,11 @@ if has('vim_starting')
 endif
 
 " Required:
-call plug#begin('~/.vim/plugged')
+if has('nvim')
+  call plug#begin('~/.config/nvim/plugged')
+else
+  call plug#begin('~/.vim/plugged')
+endif
 
 Plug 'vim-scripts/AutoClose'
 Plug 'tpope/vim-fugitive'
@@ -19,14 +23,21 @@ Plug 'mileszs/ack.vim'
 
 "" UI
 
-"" Completion
+" Completion
 if has('nvim')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
 else
-  Plug 'Shougo/deoplete.nvim'
   Plug 'roxma/nvim-yarp'
   Plug 'roxma/vim-hug-neovim-rpc'
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'Shougo/denite.nvim'
 endif
+
+"" Pyhton
+Plug 'davidhalter/jedi-vim'
+Plug 'deoplete-plugins/deoplete-jedi'
+Plug 'psf/black'
 
 "" Writing
 Plug 'reedes/vim-pencil'
@@ -225,17 +236,12 @@ nnoremap <leader>sc :CloseSession<CR>
 nnoremap <silent> <leader><space> :noh<cr>
 
 if has("gui_running")
-  set background=dark
   set clipboard=unnamed
-  colorscheme base16-solarized-dark
-  if has("gui_macvim")
-    set transparency=5
-  endif
 else
   let base16colorspace=256
-  colorscheme base16-solarized-dark
-  set background=dark
 endif
+colorscheme base16-solarized-dark
+set background=dark
 
 ""ack/ag
 if executable('rg')
@@ -245,7 +251,61 @@ elseif executable('ag')
 endif
 
 "" deoplete
+let g:python3_host_prog = $HOME.'/.pyenv/versions/3.8.0/envs/neovim3/bin/python3'
 let g:deoplete#enable_at_startup = 1
+let g:jedi#completions_enabled = 0
+
+"" denite
+call denite#custom#option('default', {
+      \ 'prompt': '❯'
+      \ })
+
+call denite#custom#var('file/rec', 'command',
+      \ ['rg', '--files', '--glob', '!.git'])
+call denite#custom#var('grep', 'command', ['rg'])
+call denite#custom#var('grep', 'default_opts',
+      \ ['--hidden', '--vimgrep', '--smart-case'])
+call denite#custom#var('grep', 'recursive_opts', [])
+call denite#custom#var('grep', 'pattern_opt', ['--regexp'])
+call denite#custom#var('grep', 'separator', ['--'])
+call denite#custom#var('grep', 'final_opts', [])
+call denite#custom#option('_', 'max_dynamic_update_candidates', 100000)
+call denite#custom#option('_', {
+      \ 'split': 'floating',
+      \ 'highlight_matched_char': 'Underlined',
+      \ 'highlight_matched_range': 'NormalFloat',
+      \ 'wincol': &columns / 6,
+      \ 'winwidth': &columns * 2 / 3,
+      \ 'winrow': &lines / 6,
+      \ 'winheight': &lines * 2 / 3
+      \ })
+
+autocmd FileType denite call s:denite_settings()
+
+function! s:denite_settings() abort
+  nnoremap <silent><buffer><expr> <CR>
+        \ denite#do_map('do_action')
+  nnoremap <silent><buffer><expr> <C-v>
+        \ denite#do_map('do_action', 'vsplit')
+  nnoremap <silent><buffer><expr> d
+        \ denite#do_map('do_action', 'delete')
+  nnoremap <silent><buffer><expr> p
+        \ denite#do_map('do_action', 'preview')
+  nnoremap <silent><buffer><expr> <Esc>
+        \ denite#do_map('quit')
+  nnoremap <silent><buffer><expr> q
+        \ denite#do_map('quit')
+  nnoremap <silent><buffer><expr> i
+        \ denite#do_map('open_filter_buffer')
+endfunction
+
+autocmd FileType denite-filter call s:denite_filter_settings()
+
+function! s:denite_filter_settings() abort
+  nmap <silent><buffer> <Esc> <Plug>(denite_filter_quit)
+endfunction
+
+nnoremap <C-p> :<C-u>Denite file/rec -start-filter<CR>
 
 "" tagbar
 nmap <F8> :TagbarToggle<CR>
@@ -267,7 +327,7 @@ let g:pencil#wrapModeDefault = 'soft'   " default is 'hard'
 
 augroup pencil
   autocmd!
-  autocmd FileType markdown,mkd call pencil#init()
+  autocmd FileType markdown,md,mkd call pencil#init()
   autocmd FileType text         call pencil#init()
 augroup END
 
