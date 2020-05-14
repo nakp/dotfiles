@@ -22,16 +22,18 @@ Plug 'ntpeters/vim-better-whitespace'
 Plug 'mileszs/ack.vim'
 
 "" UI
+Plug 'ryanoasis/vim-devicons'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'preservim/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 
 " Completion
 if has('nvim')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-  Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
 else
   Plug 'roxma/nvim-yarp'
   Plug 'roxma/vim-hug-neovim-rpc'
   Plug 'Shougo/deoplete.nvim'
-  Plug 'Shougo/denite.nvim'
 endif
 
 "" Pyhton
@@ -255,57 +257,25 @@ let g:python3_host_prog = $HOME.'/.pyenv/versions/3.8.0/envs/neovim3/bin/python3
 let g:deoplete#enable_at_startup = 1
 let g:jedi#completions_enabled = 0
 
-"" denite
-call denite#custom#option('default', {
-      \ 'prompt': '❯'
-      \ })
+"" ctrlp
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+let g:ctrlp_user_command = 'rg %s --files'
+let g:ctrlp_use_caching = 0
 
-call denite#custom#var('file/rec', 'command',
-      \ ['rg', '--files', '--glob', '!.git'])
-call denite#custom#var('grep', 'command', ['rg'])
-call denite#custom#var('grep', 'default_opts',
-      \ ['--hidden', '--vimgrep', '--smart-case'])
-call denite#custom#var('grep', 'recursive_opts', [])
-call denite#custom#var('grep', 'pattern_opt', ['--regexp'])
-call denite#custom#var('grep', 'separator', ['--'])
-call denite#custom#var('grep', 'final_opts', [])
-call denite#custom#option('_', 'max_dynamic_update_candidates', 100000)
-call denite#custom#option('_', {
-      \ 'split': 'floating',
-      \ 'highlight_matched_char': 'Underlined',
-      \ 'highlight_matched_range': 'NormalFloat',
-      \ 'wincol': &columns / 6,
-      \ 'winwidth': &columns * 2 / 3,
-      \ 'winrow': &lines / 6,
-      \ 'winheight': &lines * 2 / 3
-      \ })
+"" NERDTree
+map <C-n> :NERDTreeToggle<CR>
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+highlight! link NERDTreeFlags NERDTreeDir
 
-autocmd FileType denite call s:denite_settings()
-
-function! s:denite_settings() abort
-  nnoremap <silent><buffer><expr> <CR>
-        \ denite#do_map('do_action')
-  nnoremap <silent><buffer><expr> <C-v>
-        \ denite#do_map('do_action', 'vsplit')
-  nnoremap <silent><buffer><expr> d
-        \ denite#do_map('do_action', 'delete')
-  nnoremap <silent><buffer><expr> p
-        \ denite#do_map('do_action', 'preview')
-  nnoremap <silent><buffer><expr> <Esc>
-        \ denite#do_map('quit')
-  nnoremap <silent><buffer><expr> q
-        \ denite#do_map('quit')
-  nnoremap <silent><buffer><expr> i
-        \ denite#do_map('open_filter_buffer')
-endfunction
-
-autocmd FileType denite-filter call s:denite_filter_settings()
-
-function! s:denite_filter_settings() abort
-  nmap <silent><buffer> <Esc> <Plug>(denite_filter_quit)
-endfunction
-
-nnoremap <C-p> :<C-u>Denite file/rec -start-filter<CR>
+"" Devicons
+let g:webdevicons_enable = 1
+let g:WebDevIconsUnicodeDecorateFolderNodes = 1
+let g:DevIconsEnableFoldersOpenClose = 1
+let g:DevIconsEnableFolderPatternMatching = 1
 
 "" tagbar
 nmap <F8> :TagbarToggle<CR>
@@ -331,3 +301,6 @@ augroup pencil
   autocmd FileType text         call pencil#init()
 augroup END
 
+if exists("g:loaded_webdevicons")
+  call webdevicons#refresh()
+endif
