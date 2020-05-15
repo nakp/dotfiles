@@ -154,6 +154,7 @@ set laststatus=2
 set noshowmode
 let g:airline_powerline_fonts = 1
 "let g:airline#extensions#syntastic#enabled = 1
+let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#ale#enabled = 1
 let g:airline#extensions#whitespace#mixed_indent_algo = 1
 let g:airline_theme='base16'
@@ -217,6 +218,10 @@ noremap <leader>gr :Gremove<CR>
 nnoremap <Tab> gt
 nnoremap <S-Tab> gT
 nnoremap <silent> <S-t> :tabnew<CR>
+
+"" Buffers
+noremap <leader>n :bn<CR>
+noremap <leader>p :bp<CR>
 
 "" Windows
 
