@@ -27,20 +27,6 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'preservim/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
-" Completion
-if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
-  Plug 'Shougo/deoplete.nvim'
-endif
-
-"" Pyhton
-Plug 'davidhalter/jedi-vim'
-Plug 'deoplete-plugins/deoplete-jedi'
-Plug 'psf/black'
-
 "" Writing
 Plug 'reedes/vim-pencil'
 Plug 'junegunn/rainbow_parentheses.vim'
@@ -56,6 +42,7 @@ Plug 'majutsushi/tagbar'
 Plug 'xolox/vim-easytags'
 Plug 'tpope/vim-surround'
 Plug 'scrooloose/nerdcommenter'
+Plug 'mechatroner/rainbow_csv'
 
 " WebDev Bundle
 Plug 'mattn/emmet-vim'
@@ -256,11 +243,6 @@ if executable('rg')
 elseif executable('ag')
   let g:ackprg = 'ag --vimgrep'
 endif
-
-"" deoplete
-let g:python3_host_prog = $HOME.'/.pyenv/versions/3.8.0/envs/neovim3/bin/python3'
-let g:deoplete#enable_at_startup = 1
-let g:jedi#completions_enabled = 0
 
 "" ctrlp
 let g:ctrlp_map = '<c-p>'
