@@ -140,7 +140,6 @@ let g:strip_whitespace_on_save = 1
 set laststatus=2
 set noshowmode
 let g:airline_powerline_fonts = 1
-"let g:airline#extensions#syntastic#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#ale#enabled = 1
 let g:airline#extensions#whitespace#mixed_indent_algo = 1
@@ -159,6 +158,10 @@ let g:airline_theme='base16'
 "" ALE
 let g:ale_sign_error = '✗'
 let g:ale_sign_warning = '⚠'
+let g:ale_fix_on_save = 1
+let g:ale_fixers = {'*': ['remove_trailing_lines', 'trim_whitespace'], 'ruby': 'rubocop'}
+
+noremap <leader>lf :ALEFix<CR>
 
 " session management
 let g:session_directory = "~/.vim/session"
