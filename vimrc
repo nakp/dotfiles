@@ -46,7 +46,10 @@ Plug 'mechatroner/rainbow_csv'
 
 " WebDev Bundle
 Plug 'mattn/emmet-vim'
-"
+
+" Rails
+Plug 'tpope/vim-rails'
+
 " PHP Bundle
 "Plug 'arnaud-lb/vim-php-namespace'
 Plug 'shawncplus/phpcomplete.vim'
@@ -210,8 +213,8 @@ nnoremap <S-Tab> gT
 nnoremap <silent> <S-t> :tabnew<CR>
 
 "" Buffers
-noremap <leader>n :bn<CR>
-noremap <leader>p :bp<CR>
+noremap <leader>nn :bn<CR>
+noremap <leader>bb :bp<CR>
 
 "" Windows
 
@@ -259,6 +262,7 @@ let g:ctrlp_use_caching = 0
 map <C-n> :NERDTreeToggle<CR>
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 highlight! link NERDTreeFlags NERDTreeDir
 
 "" Devicons
