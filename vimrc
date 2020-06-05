@@ -146,6 +146,7 @@ let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#ale#enabled = 1
 let g:airline#extensions#whitespace#mixed_indent_algo = 1
+let g:airline#extensions#tabline#ignore_bufadd_pat = 'defx|gundo|nerd_tree|startify|tagbar|undotree|vimfiler'
 let g:airline_theme='base16'
 
 " Syntastic
@@ -242,6 +243,7 @@ else
 endif
 colorscheme base16-solarized-dark
 set background=dark
+hi Normal ctermbg=NONE
 
 ""ack/ag
 if executable('rg')
