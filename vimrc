@@ -115,6 +115,7 @@ syntax enable
 set cursorline
 set number relativenumber
 set updatetime=750
+set colorcolumn=81,121 " Rulers at 80 and 120
 
 " Filetypes
 autocmd Filetype php setlocal ts=4 sts=4 sw=4 expandtab
