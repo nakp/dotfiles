@@ -26,6 +26,7 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'preservim/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'chrisbra/Colorizer'
 
 "" Writing
 Plug 'reedes/vim-pencil'
@@ -140,6 +141,9 @@ au BufNewFile,BufRead Podfile set ft=ruby
 " Better Whitespace
 let g:strip_whitespace_on_save = 1
 
+" Colorizer
+let g:colorizer_auto_filetype='scss,css,html'
+
 " Airline
 set laststatus=2
 set noshowmode
@@ -237,14 +241,18 @@ nnoremap <leader>sc :CloseSession<CR>
 "" Clean search (highlight)
 nnoremap <silent> <leader><space> :noh<cr>
 
-if has("gui_running")
-  set clipboard=unnamed
-else
-  let base16colorspace=256
-endif
+"" Colors
+set termguicolors
 colorscheme base16-solarized-dark
 set background=dark
-hi Normal ctermbg=NONE
+
+if has('gui_running')
+  set clipboard=unnamed
+  hi Normal ctermbg=NONE
+else
+  let base16colorspace=256
+  hi Normal guibg=NONE ctermbg=NONE
+endif
 
 ""ack/ag
 if executable('rg')
