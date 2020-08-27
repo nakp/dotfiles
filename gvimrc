@@ -5,6 +5,6 @@ set guioptions=eg
 "" MacVim specifics
 if has('gui_macvim')
   set macligatures
-  set transparency=15
+  set transparency=10
   set blur=20
 end
