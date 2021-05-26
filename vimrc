@@ -31,6 +31,7 @@ Plug 'chrisbra/Colorizer'
 "" Writing
 Plug 'reedes/vim-pencil'
 Plug 'junegunn/rainbow_parentheses.vim'
+Plug 'terryma/vim-multiple-cursors'
 
 "" Vim-Session
 Plug 'xolox/vim-misc'
@@ -38,12 +39,14 @@ Plug 'xolox/vim-session'
 
 " Syntaxis
 "Plug 'vim-syntastic/syntastic'
+"let g:ale_completion_enabled = 1
 Plug 'dense-analysis/ale'
 Plug 'majutsushi/tagbar'
 Plug 'xolox/vim-easytags'
 Plug 'tpope/vim-surround'
 Plug 'scrooloose/nerdcommenter'
 Plug 'mechatroner/rainbow_csv'
+Plug 'joker1007/vim-ruby-heredoc-syntax'
 
 " WebDev Bundle
 Plug 'mattn/emmet-vim'
@@ -117,6 +120,7 @@ set cursorline
 set number relativenumber
 set updatetime=750
 set colorcolumn=81,121 " Rulers at 80 and 120
+set mouse=a
 
 " Filetypes
 autocmd Filetype php setlocal ts=4 sts=4 sw=4 expandtab
@@ -125,6 +129,8 @@ autocmd Filetype Jenkinsfile setlocal ts=4 sts=4 sw=4 expandtab
 autocmd FileType ruby setlocal ts=2 sts=2 sw=2 expandtab
 autocmd FileType vim setlocal ts=2 sts=2 sw=2 expandtab
 autocmd FileType jade setlocal ts=2 sts=2 sw=2 expandtab
+autocmd FileType css setlocal ts=2 sts=2 sw=2 expandtab
+autocmd FileType scss setlocal ts=2 sts=2 sw=2 expandtab
 
 au BufNewFile,BufRead Appfile set ft=ruby
 au BufNewFile,BufRead Deliverfile set ft=ruby
@@ -168,9 +174,18 @@ let g:airline_theme='base16'
 let g:ale_sign_error = '✗'
 let g:ale_sign_warning = '⚠'
 "let g:ale_fix_on_save = 1
-let g:ale_fixers = {'*': ['remove_trailing_lines', 'trim_whitespace'], 'ruby': 'rubocop'}
+let g:ale_fixers = {
+      \'*': ['remove_trailing_lines', 'trim_whitespace'],
+      \'ruby': ['rubocop'],
+      \'javascript': ['prettier', 'eslint'],
+      \'css': ['prettier', 'stylelint'],
+      \}
+
+let g:ale_completion_enabled = 1
+let g:ale_completion_autoimport = 1
 
 noremap <leader>lf :ALEFix<CR>
+noremap <leader>df :ALEGoToDefinition<CR>
 
 " session management
 let g:session_directory = "~/.vim/session"
@@ -270,17 +285,24 @@ let g:ctrlp_user_command = 'rg %s --files'
 let g:ctrlp_use_caching = 0
 
 "" NERDTree
-map <C-n> :NERDTreeToggle<CR>
+map <leader>tt :NERDTreeToggle<CR>
 autocmd StdinReadPre * let s:std_in=1
+" If more than one window and previous buffer was NERDTree, go back to it.
+autocmd BufEnter * if bufname('#') =~# "^NERD_tree_" && winnr('$') > 1 | b# | endif
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
 highlight! link NERDTreeFlags NERDTreeDir
+let g:plug_window = 'noautocmd vertical topleft new'
+
+"let NERDTreeShowHidden=1
 
 "" Devicons
 let g:webdevicons_enable = 1
 let g:WebDevIconsUnicodeDecorateFolderNodes = 1
 let g:DevIconsEnableFoldersOpenClose = 1
 let g:DevIconsEnableFolderPatternMatching = 1
+let g:NERDTreeGitStatusLogLevel = 3
 
 "" tagbar
 nmap <F8> :TagbarToggle<CR>
