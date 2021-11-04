@@ -179,6 +179,7 @@ let g:ale_fixers = {
       \'ruby': ['rubocop'],
       \'javascript': ['prettier', 'eslint'],
       \'css': ['prettier', 'stylelint'],
+      \'yaml': ['prettier'],
       \}
 
 let g:ale_completion_enabled = 1
