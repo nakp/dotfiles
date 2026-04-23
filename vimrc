@@ -39,7 +39,6 @@ Plug 'xolox/vim-session'
 
 " Syntaxis
 "Plug 'vim-syntastic/syntastic'
-"let g:ale_completion_enabled = 1
 Plug 'dense-analysis/ale'
 Plug 'majutsushi/tagbar'
 Plug 'xolox/vim-easytags'
