@@ -1,4 +1,4 @@
-console_title_template = '{{ .Shell }} in {{ .Folder }}'
+cgonsole_title_template = '{{ .Shell }} in {{ .Folder }}'
 version = 4
 final_space = true
 
@@ -18,7 +18,7 @@ final_space = true
   background = 'transparent'
 
 [transient_prompt]
-  template = '<,p:cyan> {{ .Folder }} </><p:cyan,transparent></> '
+  template = '<,p:cyan> {{ .Segments.Path.Path }} </><p:cyan,transparent></> '
   foreground = 'p:black'
   background = 'transparent'
 
@@ -56,14 +56,15 @@ final_space = true
   [[blocks.segments]]
     leading_diamond = ''
     trailing_diamond = ''
-    template = '  {{ path .Path .Location }} '
+    template = '  {{ .Path }} '
     foreground = 'p:black'
     background = 'p:cyan'
     type = 'path'
     style = 'diamond'
 
     [blocks.segments.options]
-      style = 'folder'
+      style = 'letter'
+      home_icon = '~'
 
   [[blocks.segments]]
     leading_diamond = ''
