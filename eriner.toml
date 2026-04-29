@@ -1,0 +1,169 @@
+console_title_template = '{{ .Shell }} in {{ .Folder }}'
+version = 4
+final_space = true
+
+[palette]
+  black = 'black'
+  blue = 'blue'
+  cyan = 'cyan'
+  green = 'green'
+  orange = 'lightYellow'
+  red = 'red'
+  white = 'white'
+  yellow = 'yellow'
+
+[secondary_prompt]
+  template = '<,p:black> > </><p:black,transparent></> '
+  foreground = 'p:black'
+  background = 'transparent'
+
+[transient_prompt]
+  template = '<,p:cyan> {{ .Folder }} </><p:cyan,transparent></> '
+  foreground = 'p:black'
+  background = 'transparent'
+
+[upgrade]
+  source = 'cdn'
+  interval = '168h'
+  auto = false
+  notice = false
+
+[[blocks]]
+  type = 'prompt'
+  alignment = 'left'
+
+  [[blocks.segments]]
+    leading_diamond = ''
+    trailing_diamond = ''
+    template = ' ✘ {{ .Code }} '
+    foreground = 'p:red'
+    background = 'p:black'
+    type = 'status'
+    style = 'diamond'
+
+    [blocks.segments.options]
+      always_enabled = false
+
+  [[blocks.segments]]
+    leading_diamond = ''
+    trailing_diamond = ''
+    template = ' {{ if .SSHSession }} {{ .UserName }} {{ end }}'
+    foreground = 'p:white'
+    background = 'p:black'
+    type = 'session'
+    style = 'diamond'
+
+  [[blocks.segments]]
+    leading_diamond = ''
+    trailing_diamond = ''
+    template = '  {{ path .Path .Location }} '
+    foreground = 'p:black'
+    background = 'p:cyan'
+    type = 'path'
+    style = 'diamond'
+
+    [blocks.segments.options]
+      style = 'folder'
+
+  [[blocks.segments]]
+    leading_diamond = ''
+    trailing_diamond = ''
+    template = ' {{ if .UpstreamURL }}{{ url .UpstreamIcon .UpstreamURL }} {{ end }}{{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }}  {{ .Working.String }}{{ end }}{{ if .Staging.Changed }}  {{ .Staging.String }}{{ end }} '
+    foreground = 'p:black'
+    background = 'p:green'
+    type = 'git'
+    style = 'diamond'
+    background_templates = ['{{ if or (.Working.Changed) (.Staging.Changed) }}p:yellow{{ end }}', '{{ if and (gt .Ahead 0) (gt .Behind 0) }}p:red{{ end }}', '{{ if gt .Ahead 0 }}blue{{ end }}', '{{ if gt .Behind 0 }}magenta{{ end }}']
+    foreground_templates = ['{{ if or (.Working.Changed) (.Staging.Changed) }}p:black{{ end }}', '{{ if and (gt .Ahead 0) (gt .Behind 0) }}p:white{{ end }}', '{{ if gt .Ahead 0 }}p:white{{ end }}']
+
+    [blocks.segments.options]
+      branch_template = '{{ trunc 25 .Branch }}'
+      fetch_status = true
+      fetch_upstream_icon = true
+
+  [[blocks.segments]]
+    leading_diamond = ''
+    trailing_diamond = ''
+    template = '  '
+    foreground = 'p:white'
+    background = 'p:yellow'
+    type = 'root'
+    style = 'diamond'
+
+
+[[blocks]]
+  type = 'rprompt'
+
+  [[blocks.segments]]
+    template = ' '
+    foreground = 'p:green'
+    background = 'transparent'
+    type = 'node'
+    style = 'plain'
+
+    [blocks.segments.options]
+      display_mode = 'files'
+      fetch_package_manager = false
+      home_enabled = false
+
+  [[blocks.segments]]
+    template = ' '
+    foreground = 'p:blue'
+    background = 'transparent'
+    type = 'go'
+    style = 'plain'
+
+    [blocks.segments.options]
+      fetch_version = false
+
+  [[blocks.segments]]
+    template = ' '
+    foreground = 'p:yellow'
+    background = 'transparent'
+    type = 'python'
+    style = 'plain'
+
+    [blocks.segments.options]
+      display_mode = 'files'
+      fetch_version = false
+      fetch_virtual_env = false
+
+  [[blocks.segments]]
+    template = 'in <p:blue><b>{{ .Name }}</b></> '
+    foreground = 'p:white'
+    background = 'transparent'
+    type = 'shell'
+    style = 'plain'
+
+  [[blocks.segments]]
+    template = 'at <p:blue><b>{{ .CurrentDate | date "15:04:05" }}</b></>'
+    foreground = 'p:white'
+    background = 'transparent'
+    type = 'time'
+    style = 'plain'
+
+[[tooltips]]
+  leading_diamond = ''
+  trailing_diamond = ''
+  template = '  {{ .Profile }}{{ if .Region }}@{{ .Region }}{{ end }} '
+  foreground = 'p:white'
+  background = 'p:orange'
+  type = 'aws'
+  style = 'diamond'
+  tips = ['aws']
+
+  [tooltips.options]
+    display_default = true
+
+[[tooltips]]
+  leading_diamond = ''
+  trailing_diamond = ''
+  template = '  {{ .Name }} '
+  foreground = 'p:white'
+  background = 'p:blue'
+  type = 'az'
+  style = 'diamond'
+  tips = ['az']
+
+  [tooltips.options]
+    display_default = true
