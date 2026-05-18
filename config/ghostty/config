@@ -1,0 +1,10 @@
+background-opacity = 0.8
+background-blur = true
+
+cursor-style = block
+copy-on-select = true
+clipboard-trim-trailing-spaces = true
+
+shell-integration-features = no-cursor
+
+macos-titlebar-style = transparent
