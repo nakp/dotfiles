@@ -1,10 +1,17 @@
-background-opacity = 0.8
+font-family = "Fira Code"
+font-style = "Regular"
+font-size = 12.0
+font-thicken = true
+font-thicken-strength = 100
+
+background-opacity = 0.85
 background-blur = true
 
 cursor-style = block
-copy-on-select = true
+copy-on-select = clipboard
 clipboard-trim-trailing-spaces = true
 
+link-url = true
 shell-integration-features = no-cursor
 
 macos-titlebar-style = transparent
